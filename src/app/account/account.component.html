@@ -1,0 +1,176 @@
+<!-- Creates a new angular material tab group -->
+<mat-tab-group>
+    <!-- Creates a new angular material tab with label "Add Subscription Services" -->
+    <mat-tab label="Add Subscription Services">
+        <!-- Creates a new angular logical container -->
+        <ng-container>
+            <!-- Creates a new form using the form group servicesForm and to run onSave function when it is submitted -->
+            <form [formGroup]="servicesForm" (ngSubmit)="onSave()">
+                <!-- Creates a new div with class name "form-group mt-3" -->
+                <div class = "form-group mt-3">
+                    <!-- <section>
+                        <mat-checkbox class="form-control" formControlName="service">Netflix</mat-checkbox>
+                    </section>
+                    <section>
+                        <mat-checkbox class="form-control"  formControlName="service">Sky Go</mat-checkbox>
+                    </section>
+                    <section>
+                        <mat-checkbox class="form-control"  formControlName="service">Now TV</mat-checkbox>
+                    </section>
+                    <section>
+                        <mat-checkbox class="form-control"  formControlName="service">Amazon Prime Video</mat-checkbox>
+                    </section>
+                    <section>
+                        <mat-checkbox class="form-control"  formControlName="service">Disney Plus</mat-checkbox>
+                    </section> -->
+                    <!-- <input class="form-control" type="text" placeholder="New Service" autocomplete="off" formControlName = "service"> -->
+                    
+                    <!-- Creates a new button with properties from angular material and adds an onClick listener to run onAddServices when it is clicked -->
+                    <button mat-flat-button color="primary" type="button" (click)="onAddServices()">Add Service</button>
+                    <!-- Creates a new div that utilises the form array services and uses a angular for to  -->
+                    <div class="form-group mt-3" formArrayName="services" *ngFor="let control of getServices(); let i = index;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <!-- Creates a new text input to enter the name of a streaming service and have it added to the services array -->
+                                <input type="text" class="form-control" [formControlName] = "i" formControlName = "streamService"> 
+                            </div>
+                            <div class="col-sm-3">
+                                <!-- Creates a new button with angular material properties to delete services from the array by using an onClick listener to run onRemoveService on index position of services array -->
+                                <button mat-flat-button color="primary" class="btn btn-danger" type="button" (click)="onRemoveService(i)">Delete</button>
+                            </div>
+                        </div>
+                        <!-- <button mat-flat-button color="primary" type="submit" (click)="onAddStreaming()">Save</button> -->
+                        <!-- Creates a new button with angular material properties. Used to submit the form -->
+                        <button mat-flat-button color="primary" type="submit">Save</button>
+                    </div>
+                    <!-- <section> -->
+                    <!-- <button mat-flat-button color="primary" type="submit" (click)="onAddStreaming()">Save</button> -->
+                    <!-- </section> -->
+                    <!-- <hr>
+                    <button mat-flat-button color="primary" type="button" (click)="onAddServices()">Add Service</button>
+                    <div class="form-group mt-3" formArrayName="services" *ngFor="let control of getServices(); let i = index;">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" [formControlName] = "i"> 
+                            </div>
+                            <div class="col-sm-3">
+                                <button mat-flat-button color="primary" class="btn btn-danger">X</button>
+                            </div> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                </div>
+            </form>
+        </ng-container>
+    </mat-tab>
+
+    <!-- New tab as alternative to one used above (NON FUNCTIONING) -->
+    <!-- A series of angular material checkboxes to be used to select the streaming services that you have to then be submitted to firebase -->
+    <mat-tab label="Subscription Services">
+        <ng-container>
+          <mat-card>
+            <form [formGroup]="servicesForm" > 
+                <mat-grid-list cols="5" rowHeight="2:1">
+                    <mat-grid-tile>
+                            
+                                <section class="netflix-section">
+                                    <mat-checkbox class="netflix-margin">Netflix</mat-checkbox>
+                                </section>
+                                                
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            
+                                <section class="sky-section">
+                                    <mat-checkbox class="sky-margin">Sky Go</mat-checkbox>
+                                </section>
+                            
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            
+                                <section class="now-section">
+                                    <mat-checkbox class="now-margin">Now TV</mat-checkbox>
+                                </section>
+                            
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            
+                                <section class="amazon-section">
+                                    <mat-checkbox class="amazon-margin">Amazon Video</mat-checkbox>
+                                </section>
+                            
+                        </mat-grid-tile>
+                        <mat-grid-tile>
+                            
+                                <section class="disney-section">
+                                    <mat-checkbox class="disney-margin">Disney Plus</mat-checkbox>
+                                </section>
+                            
+                        </mat-grid-tile>
+                    
+                </mat-grid-list>
+                <mat-grid-list cols="1" rowHeight="1:1">
+                        <button color="primary">Delete</button>
+                </mat-grid-list>
+            </form>  
+          </mat-card>
+        </ng-container>
+    </mat-tab>
+    
+
+  </mat-tab-group>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <form> 
+    <mat-grid-list cols="5" rowHeight="2:1">
+        <mat-grid-tile>
+                
+                    <section class="netflix-section">
+                        <mat-checkbox (click)="onAddStreaming" class="netflix-margin">Netflix</mat-checkbox>
+                    </section>
+                                    
+            </mat-grid-tile>
+            <mat-grid-tile>
+                
+                    <section class="sky-section">
+                        <mat-checkbox (click)="onAddStreaming" class="sky-margin">Sky Go</mat-checkbox>
+                    </section>
+                
+            </mat-grid-tile>
+            <mat-grid-tile>
+                
+                    <section class="now-section">
+                        <mat-checkbox (click)="onAddStreaming" class="now-margin">Now TV</mat-checkbox>
+                    </section>
+                
+            </mat-grid-tile>
+            <mat-grid-tile>
+                
+                    <section class="amazon-section">
+                        <mat-checkbox (click)="onAddStreaming" class="amazon-margin">Amazon Video</mat-checkbox>
+                    </section>
+                
+            </mat-grid-tile>
+            <mat-grid-tile>
+                
+                    <section class="disney-section">
+                        <mat-checkbox (click)="onAddStreaming" class="disney-margin">Disney Plus</mat-checkbox>
+                    </section>
+                
+            </mat-grid-tile>
+        
+    </mat-grid-list>
+    <mat-grid-list cols="1" rowHeight="1:1">
+            <button color="primary" (click)="onSave()">Save Selected Services</button>
+    </mat-grid-list>
+</form>   -->
